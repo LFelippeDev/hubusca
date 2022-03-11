@@ -7,22 +7,32 @@ import {
   DevCardInfos,
 } from './styles';
 
-interface IDevCardProps {
+export interface IDevCardProps {
   name: string;
   login: string;
   image: string;
   location: string;
 }
 
-export const DevCard = ({ image, location, login, name }: IDevCardProps) => {
+interface IDevCardComponentProps extends Omit<IDevCardProps, ''> {
+  onClick: () => void;
+}
+
+export const DevCard = ({
+  image,
+  location,
+  login,
+  name,
+  onClick,
+}: IDevCardComponentProps) => {
   return (
-    <DevCardContainer>
+    <DevCardContainer onClick={onClick}>
       <DevCardImage src={image} alt="Foto do Dev" />
       <DevCardFooter>
         <DevCardName>{name}</DevCardName>
         <DevCardInfos>{login}</DevCardInfos>
         <DevCardInfos>
-          <LocationIcon />
+          {location && <LocationIcon />}
           {location}
         </DevCardInfos>
       </DevCardFooter>

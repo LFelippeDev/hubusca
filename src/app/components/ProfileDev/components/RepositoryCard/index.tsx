@@ -1,4 +1,4 @@
-import { IPublicRepository } from '../../../../interfaces/DevProps';
+import { IDevReposResponseProps } from '../../../../interfaces/DevProps';
 import {
   RepositoryCardName,
   RepositoryCardContainer,
@@ -8,26 +8,27 @@ import {
 } from './styles';
 
 interface IRepositoryCardProps {
-  repositoryItem: IPublicRepository;
+  repositoryItem: IDevReposResponseProps;
 }
 
 export const RepositoryCard = ({ repositoryItem }: IRepositoryCardProps) => {
-  const { createdAt, language, lastPush, name, resume } = repositoryItem;
+  const { update_at, language, created_at, name, description } = repositoryItem;
   return (
     <RepositoryCardContainer>
       <RepositoryCardName>{name}</RepositoryCardName>
       <RepositoryCardInfos>
+        <RepositoryCardInfos>{description}</RepositoryCardInfos>
         <RepositoryCardInfosLabel>Linguagem:</RepositoryCardInfosLabel>
         {language}
       </RepositoryCardInfos>
       <RepositoryCardFooter>
         <RepositoryCardInfos>
           <RepositoryCardInfosLabel>Criação:</RepositoryCardInfosLabel>
-          {createdAt}
+          {created_at}
         </RepositoryCardInfos>
         <RepositoryCardInfos>
           <RepositoryCardInfosLabel>Último push:</RepositoryCardInfosLabel>
-          {lastPush}
+          {update_at}
         </RepositoryCardInfos>
       </RepositoryCardFooter>
     </RepositoryCardContainer>

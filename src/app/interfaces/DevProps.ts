@@ -1,11 +1,3 @@
-export interface IPublicRepository {
-  name: string;
-  resume?: string;
-  language: string;
-  lastPush: string;
-  createdAt: string;
-}
-
 export interface IDevProps {
   id: string;
   name: string;
@@ -14,5 +6,23 @@ export interface IDevProps {
   location: string;
   followers: number;
   totalPublicRepositories: number;
-  publicRepositories: IPublicRepository[];
+  publicRepositories: IDevReposResponseProps[];
+}
+
+export interface IDevInfosResponseProps {
+  id: string;
+  name: string;
+  login: string;
+  avatar_url: string;
+  location: string;
+  followers: number;
+  public_repos: number;
+}
+
+export interface IDevReposResponseProps {
+  name: string;
+  description?: string;
+  language: string;
+  created_at: string;
+  update_at: string;
 }

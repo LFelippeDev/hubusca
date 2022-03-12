@@ -22,7 +22,7 @@ export interface IDevInfosResponseProps {
 export interface IDevReposResponseProps {
   name: string;
   description?: string;
-  language: string;
+  language?: string;
   created_at: string;
-  update_at: string;
+  pushed_at: string;
 }

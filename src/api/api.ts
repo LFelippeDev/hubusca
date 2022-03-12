@@ -10,11 +10,11 @@ const baseURL = 'https://api.github.com/users/';
 
 export const searchDev = async (
   devLogin?: string
-): Promise<IDevProps | string | undefined> => {
+): Promise<IDevProps | undefined> => {
   try {
     let loginSelectedDev = localStorage.getItem('Dev');
     if (!devLogin) {
-      if (!loginSelectedDev) return 'Procure um dev';
+      if (!loginSelectedDev) return;
 
       loginSelectedDev = JSON.parse(loginSelectedDev);
     }
@@ -23,7 +23,7 @@ export const searchDev = async (
       baseURL + (devLogin ? devLogin : loginSelectedDev)
     );
 
-    if (!devInfos) return 'Esse Dev nao existe';
+    if (!devInfos) return ;
 
     if (devLogin) {
       localStorage.setItem('Dev', JSON.stringify(devLogin));

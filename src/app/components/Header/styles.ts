@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const HeaderContainer = styled.header`
   background: ${(props) => props.theme.colors.primary};
-  height: 4.8rem;
+  height: 8vh;
 
   border-bottom-right-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
@@ -15,6 +15,10 @@ export const HeaderContainer = styled.header`
 export const HeaderLogo = styled.img`
   height: 55%;
   margin: 0 1.75rem;
+
+  @media (max-width: 820px) {
+    margin: 0 1rem;
+  }
 `;
 
 export const HeaderSearchBar = styled.form`
@@ -52,5 +56,9 @@ export const HeaderSearchBar = styled.form`
       opacity: 0.7;
       cursor: pointer;
     }
+  }
+
+  @media (max-width: 820px) {
+    width: 100%;
   }
 `;

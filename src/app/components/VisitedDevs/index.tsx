@@ -1,6 +1,6 @@
 import { SectionTitle } from '../../styles/SectionTitle';
 import { DevCard, IDevCardProps } from '../DevCard';
-import { VisitedDevsContainer } from './styles';
+import { VisitedDevsContainer, VisitedDevsList } from './styles';
 
 interface IVisitedDevsProps {
   lastVisitedDevs: IDevCardProps[];
@@ -14,18 +14,20 @@ export const VisitedDevs = ({
   return (
     <VisitedDevsContainer>
       <SectionTitle>Devs Visitados</SectionTitle>
-      {lastVisitedDevs.map((dev, index) => {
-        return (
-          <DevCard
-            onClick={() => openVisitedDev(dev.login)}
-            key={index}
-            image={dev.image}
-            name={dev.name}
-            location={dev.location}
-            login={dev.login}
-          />
-        );
-      })}
+      <VisitedDevsList>
+        {lastVisitedDevs.map((dev, index) => {
+          return (
+            <DevCard
+              onClick={() => openVisitedDev(dev.login)}
+              key={index}
+              image={dev.image}
+              name={dev.name}
+              location={dev.location}
+              login={dev.login}
+            />
+          );
+        })}
+      </VisitedDevsList>
     </VisitedDevsContainer>
   );
 };

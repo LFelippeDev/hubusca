@@ -1,5 +1,7 @@
 import { IDevProps } from '../../interfaces/DevProps';
 import { LocationIcon } from '../../styles/LocationIcon';
+import { SectionTitle } from '../../styles/SectionTitle';
+import { WithoutInformation } from '../../styles/WithoutInformation';
 import { RepositoryCard } from './components/RepositoryCard';
 import {
   ProfileDevContainer,
@@ -36,12 +38,12 @@ export const ProfileDev = ({ selectedDev }: IProfileDevProps) => {
         <ProfileDevNameOrId>{name}</ProfileDevNameOrId>
         <ProfileDevInfos>{login}</ProfileDevInfos>
         <ProfileDevInfos>
-          <LocationIcon />
+          {location && <LocationIcon />}
           {location}
         </ProfileDevInfos>
         <ProfileDevStatusInfos>
           <ProfileDevInfos isBold>
-            <ProfileDevNumberInfos>{followers}</ProfileDevNumberInfos>{' '}
+            <ProfileDevNumberInfos>{followers}</ProfileDevNumberInfos>
             Seguidor(es)
           </ProfileDevInfos>
           <ProfileDevInfos isBold>
@@ -53,9 +55,14 @@ export const ProfileDev = ({ selectedDev }: IProfileDevProps) => {
         </ProfileDevStatusInfos>
       </ProfileDevBoxInfos>
       <ProfileDevRepositoryList>
-        {publicRepositories.map((repository, index) => (
-          <RepositoryCard key={index} repositoryItem={repository} />
-        ))}
+        <SectionTitle>Repositórios</SectionTitle>
+        {publicRepositories.length !== 0 ? (
+          publicRepositories.map((repository, index) => (
+            <RepositoryCard key={index} repositoryItem={repository} />
+          ))
+        ) : (
+          <WithoutInformation infoMessage="Este dev ainda não tem repositórios." />
+        )}
       </ProfileDevRepositoryList>
     </ProfileDevContainer>
   );

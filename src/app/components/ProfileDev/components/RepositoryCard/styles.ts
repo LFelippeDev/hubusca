@@ -22,7 +22,7 @@ export const RepositoryCardName = styled.b`
   color: ${(props) => props.theme.colors.devInfosText};
 `;
 
-export const RepositoryCardInfos = styled.text`
+export const RepositoryCardInfos = styled.span`
   display: flex;
   font-size: 0.75rem;
   font-weight: 500;

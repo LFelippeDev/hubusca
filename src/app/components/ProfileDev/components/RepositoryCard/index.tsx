@@ -1,3 +1,4 @@
+import { formatDate } from '../../../../helpers/formatDate';
 import { IDevReposResponseProps } from '../../../../interfaces/DevProps';
 import {
   RepositoryCardName,
@@ -12,23 +13,32 @@ interface IRepositoryCardProps {
 }
 
 export const RepositoryCard = ({ repositoryItem }: IRepositoryCardProps) => {
-  const { update_at, language, created_at, name, description } = repositoryItem;
+  const { pushed_at, language, created_at, name, description } = repositoryItem;
+  const createRepositoryDate = formatDate(created_at);
+  const lastPushDate = formatDate(pushed_at);
+
   return (
     <RepositoryCardContainer>
       <RepositoryCardName>{name}</RepositoryCardName>
-      <RepositoryCardInfos>
-        <RepositoryCardInfos>{description}</RepositoryCardInfos>
-        <RepositoryCardInfosLabel>Linguagem:</RepositoryCardInfosLabel>
-        {language}
-      </RepositoryCardInfos>
+      {description && (
+        <RepositoryCardInfos>
+          <RepositoryCardInfos>{description}</RepositoryCardInfos>
+        </RepositoryCardInfos>
+      )}
+      {language && (
+        <RepositoryCardInfos>
+          <RepositoryCardInfosLabel>Linguagem:</RepositoryCardInfosLabel>
+          {language}
+        </RepositoryCardInfos>
+      )}
       <RepositoryCardFooter>
         <RepositoryCardInfos>
           <RepositoryCardInfosLabel>Criação:</RepositoryCardInfosLabel>
-          {created_at}
+          {createRepositoryDate}
         </RepositoryCardInfos>
         <RepositoryCardInfos>
           <RepositoryCardInfosLabel>Último push:</RepositoryCardInfosLabel>
-          {update_at}
+          {lastPushDate}
         </RepositoryCardInfos>
       </RepositoryCardFooter>
     </RepositoryCardContainer>

@@ -6,14 +6,13 @@ import { ProfileDev } from './components/ProfileDev';
 import { VisitedDevs } from './components/VisitedDevs';
 import { IDevProps } from './interfaces/DevProps';
 import { ContentPage, MaxWidthContainer } from './styles/ContentPage';
-import { SeparationLine } from './styles/SeparatioLine';
 import { searchDev } from '../api/api';
 import { useLastVisitedDevs } from './hooks/useLastVisitedDevs';
+import { WithoutInformation } from './styles/WithoutInformation';
 
 export const App = () => {
   const [selectedDev, setSelectedDev] = useState<IDevProps | undefined>();
   const [devOnSearchBar, setDevOpen] = useState<string>('');
-  const [error, setError] = useState<string>('Procure um dev');
 
   const lastVisitedDevs = useLastVisitedDevs();
 
@@ -21,7 +20,6 @@ export const App = () => {
     const formatedDev = searchDev(devOnSearchBar);
     formatedDev.then((value) => {
       if (typeof value === 'string') {
-        setError(value);
         return;
       }
       setSelectedDev(value);
@@ -33,12 +31,17 @@ export const App = () => {
       <Header searchDevs={setDevOpen} />
       <ContentPage>
         <MaxWidthContainer>
-          {selectedDev && <ProfileDev selectedDev={selectedDev} />}
-          <SeparationLine />
-          <VisitedDevs
-            lastVisitedDevs={lastVisitedDevs}
-            openVisitedDev={setDevOpen}
-          />
+          {selectedDev ? (
+            <ProfileDev selectedDev={selectedDev} />
+          ) : (
+            <WithoutInformation infoMessage="Dev não encontrado, busque outro dev!" />
+          )}
+          {lastVisitedDevs && (
+            <VisitedDevs
+              lastVisitedDevs={lastVisitedDevs}
+              openVisitedDev={setDevOpen}
+            />
+          )}
         </MaxWidthContainer>
       </ContentPage>
     </ThemeProvider>
